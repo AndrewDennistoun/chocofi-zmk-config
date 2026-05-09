@@ -14,10 +14,6 @@
 
 / {
     behaviors {
-        // Tap-preferred hold-tap for home row mods.
-        // Tap fires unless you hold longer than tapping-term-ms.
-        // 280ms is long enough that normal typing never triggers it accidentally,
-        // but short enough that deliberate holds feel snappy.
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -33,81 +29,82 @@
 
         // ──────────────────────────────────────────────────────────────────────
         // BASE — Colemak-DH
-        // Home row: A=GUI  R=Alt  S=Shift  T=Ctrl | N=Ctrl  E=Shift  I=Alt  O=GUI
-        // Thumbs:   Tab(Media)  Space(Nav)  Esc  |  Ret  Bksp(Num)  Del(Fun)
+        // Left  home row: A=GUI  R=Alt  S=Shift  T=Ctrl
+        // Right home row: N=Shift  E=Ctrl  I=Alt  O=GUI
+        // Left  thumbs (outer→inner): Esc(Media)  Space(Nav)  Tab
+        // Right thumbs (inner→outer): Enter  Bksp(Num)  Del(Fun)
         // ──────────────────────────────────────────────────────────────────────
         base_layer {
             bindings = <
 &none  &kp Q       &kp W       &kp F        &kp P        &kp B        &kp J    &kp L        &kp U        &kp Y       &kp SEMI     &none
-&none  &hm LGUI A  &hm LALT R  &hm LSHFT S  &hm LCTRL T  &kp G        &kp M    &hm RCTRL N  &hm RSHFT E  &hm RALT I  &hm RGUI O   &none
+&none  &hm LGUI A  &hm LALT R  &hm LSHFT S  &hm LCTRL T  &kp G        &kp M    &hm RSHFT N  &hm RCTRL E  &hm RALT I  &hm RGUI O   &none
 &none  &kp Z       &kp X       &kp C        &kp D        &kp V        &kp K    &kp H        &kp COMMA    &kp DOT     &kp FSLH     &none
-                   &lt MEDIA TAB  &lt NAV SPACE  &kp ESC                &kp RET  &lt NUM BSPC  &lt FUN DEL
+                   &lt MEDIA ESC  &lt NAV SPACE  &kp TAB                &kp RET  &lt NUM BSPC  &lt FUN DEL
             >;
         };
 
         // ──────────────────────────────────────────────────────────────────────
-        // NAV — Navigation
-        // Right: arrow cluster, page/home/end
-        // Left: hold-available modifiers + macOS clipboard (Cmd-based)
+        // NAV — Navigation (hold Space)
+        // Right: arrow cluster + page/home/end
+        // Left:  modifiers + macOS clipboard
         // ──────────────────────────────────────────────────────────────────────
         nav_layer {
             bindings = <
-&none  &trans      &trans      &trans       &trans       &trans       &kp PG_UP  &kp HOME   &kp UP     &kp END    &kp INS    &none
-&none  &kp LGUI    &kp LALT    &kp LSHFT    &kp LCTRL    &trans       &kp PG_DN  &kp LEFT   &kp DOWN   &kp RIGHT  &kp DEL    &none
-&none  &kp LG(Z)   &kp LG(X)   &kp LG(C)    &kp LG(V)    &kp LS(LG(Z)) &trans  &trans     &trans     &trans     &trans     &none
-                               &trans  &trans  &trans                  &kp RET   &kp BSPC   &kp DEL
+&none  &trans      &trans      &trans       &trans       &trans         &kp PG_UP  &kp HOME   &kp UP     &kp END    &kp INS    &none
+&none  &kp LGUI    &kp LALT    &kp LSHFT    &kp LCTRL    &trans         &kp PG_DN  &kp LEFT   &kp DOWN   &kp RIGHT  &kp DEL    &none
+&none  &kp LG(Z)   &kp LG(X)   &kp LG(C)    &kp LG(V)    &kp LS(LG(Z))  &trans     &trans     &trans     &trans     &trans     &none
+                               &trans  &trans  &trans                    &kp RET   &kp BSPC   &kp DEL
             >;
         };
 
         // ──────────────────────────────────────────────────────────────────────
-        // SYM — Symbols
-        // Left: symbols (mirrors Num layer — same positions, shifted equivalents)
-        // Right: hold-available modifiers
+        // SYM — Symbols (hold Enter)
+        // Left:  symbols (shifted Num equivalents)
+        // Right: modifiers
         // Thumbs: ( ) _
         // ──────────────────────────────────────────────────────────────────────
         sym_layer {
             bindings = <
 &none  &kp LBRC    &kp AMPS    &kp ASTRK    &kp LPAR     &kp RBRC     &trans     &trans     &trans     &trans     &trans     &none
-&none  &kp COLON   &kp DLLR    &kp PRCNT    &kp CARET    &kp PLUS     &trans     &kp RCTRL  &kp RSHFT  &kp RALT   &kp RGUI   &none
+&none  &kp COLON   &kp DLLR    &kp PRCNT    &kp CARET    &kp PLUS     &trans     &kp RSHFT  &kp RCTRL  &kp RALT   &kp RGUI   &none
 &none  &kp TILDE   &kp EXCL    &kp AT       &kp HASH     &kp PIPE     &trans     &trans     &trans     &trans     &trans     &none
                                &kp LPAR  &kp RPAR  &kp UNDER          &trans     &trans     &trans
             >;
         };
 
         // ──────────────────────────────────────────────────────────────────────
-        // NUM — Numbers
-        // Left: numpad-style layout
-        // Right: hold-available modifiers
+        // NUM — Numbers (hold Backspace)
+        // Left:  numpad layout
+        // Right: modifiers
         // Thumbs: . 0 -
         // ──────────────────────────────────────────────────────────────────────
         num_layer {
             bindings = <
 &none  &kp LBKT    &kp N7      &kp N8       &kp N9       &kp RBKT     &trans     &trans     &trans     &trans     &trans     &none
-&none  &kp SEMI    &kp N4      &kp N5       &kp N6       &kp EQUAL    &trans     &kp RCTRL  &kp RSHFT  &kp RALT   &kp RGUI   &none
+&none  &kp SEMI    &kp N4      &kp N5       &kp N6       &kp EQUAL    &trans     &kp RSHFT  &kp RCTRL  &kp RALT   &kp RGUI   &none
 &none  &kp GRAVE   &kp N1      &kp N2       &kp N3       &kp BSLH     &trans     &trans     &trans     &trans     &trans     &none
                                &kp DOT  &kp N0  &kp MINUS              &trans     &trans     &trans
             >;
         };
 
         // ──────────────────────────────────────────────────────────────────────
-        // FUN — Function keys
-        // Left: F-key numpad layout (mirrors Num)
-        // Right: hold-available modifiers
-        // Thumbs: App  Space  Tab
+        // FUN — Function keys (hold Delete)
+        // Left:  F-keys (mirrors Num positions)
+        // Right: modifiers
         // ──────────────────────────────────────────────────────────────────────
         fun_layer {
             bindings = <
-&none  &kp F12     &kp F7      &kp F8       &kp F9       &kp PSCRN    &trans     &trans     &trans     &trans     &trans     &none
-&none  &kp F11     &kp F4      &kp F5       &kp F6       &kp SLCK     &trans     &kp RCTRL  &kp RSHFT  &kp RALT   &kp RGUI   &none
+&none  &kp F12     &kp F7      &kp F8       &kp F9       &kp PSCRN       &trans  &trans     &trans     &trans     &trans     &none
+&none  &kp F11     &kp F4      &kp F5       &kp F6       &kp SLCK        &trans  &kp RSHFT  &kp RCTRL  &kp RALT   &kp RGUI   &none
 &none  &kp F10     &kp F1      &kp F2       &kp F3       &kp PAUSE_BREAK &trans  &trans     &trans     &trans     &trans     &none
-                               &kp K_APP  &kp SPACE  &kp TAB          &trans     &trans     &trans
+                               &kp K_APP  &kp SPACE  &kp TAB            &trans  &trans     &trans
             >;
         };
 
         // ──────────────────────────────────────────────────────────────────────
-        // MEDIA — Media controls + Bluetooth
-        // Right home row: prev / vol-down / vol-up / next
-        // Right bottom:   BT profiles 0-3 + BT clear
+        // MEDIA — Media + Bluetooth (hold Esc)
+        // Right home: prev / vol-dn / vol-up / next
+        // Right bottom: BT profiles 0–3 + BT clear
         // Thumbs: stop  play/pause  mute
         // ──────────────────────────────────────────────────────────────────────
         media_layer {
