@@ -25,15 +25,65 @@
         };
     };
 
+    combos {
+        compatible = "zmk,combos";
+
+        // Shift combos — faster than home row mod hold
+        combo_lshift {
+            timeout-ms = <50>;
+            key-positions = <16 17>;
+            bindings = <&kp LSHFT>;
+        };
+        combo_rshift {
+            timeout-ms = <50>;
+            key-positions = <18 19>;
+            bindings = <&kp RSHFT>;
+        };
+
+        // Bracket combos — vertical (top row + home row), left hand
+        combo_lbrace {
+            timeout-ms = <50>;
+            key-positions = <2 14>;
+            bindings = <&kp LBRC>;
+        };
+        combo_lbkt {
+            timeout-ms = <50>;
+            key-positions = <3 15>;
+            bindings = <&kp LBKT>;
+        };
+        combo_lpar {
+            timeout-ms = <50>;
+            key-positions = <4 16>;
+            bindings = <&kp LPAR>;
+        };
+
+        // Bracket combos — vertical (top row + home row), right hand
+        combo_rpar {
+            timeout-ms = <50>;
+            key-positions = <7 19>;
+            bindings = <&kp RPAR>;
+        };
+        combo_rbkt {
+            timeout-ms = <50>;
+            key-positions = <8 20>;
+            bindings = <&kp RBKT>;
+        };
+        combo_rbrace {
+            timeout-ms = <50>;
+            key-positions = <9 21>;
+            bindings = <&kp RBRC>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
         // ──────────────────────────────────────────────────────────────────────
         // BASE — Colemak-DH
-        // Left  home row: A=GUI  R=Alt  S=Shift  T=Ctrl
+        // Left  home row: A=GUI  R=Alt  S=Ctrl  T=Shift
         // Right home row: N=Shift  E=Ctrl  I=Alt  O=GUI
-        // Left  thumbs (outer→inner): Esc(Media)  Space(Nav)  Tab
-        // Right thumbs (inner→outer): Enter  Bksp(Num)  Del(Fun)
+        // Left  thumbs (outer→inner): Esc(Media)  Space(Nav)  Tab(Mouse)
+        // Right thumbs (inner→outer): Enter(Sym)  Bksp(Num)  Del(Fun)
         // ──────────────────────────────────────────────────────────────────────
 
         base_layer {
