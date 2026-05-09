@@ -318,7 +318,7 @@ combos:
   k: ']'
 - p: [9, 21]
   k: '}'
-- p: [17, 38]
+- p: [16, 37]
   k: LEFT SHIFT
-- p: [18, 39]
+- p: [19, 40]
   k: RIGHT SHIFT
